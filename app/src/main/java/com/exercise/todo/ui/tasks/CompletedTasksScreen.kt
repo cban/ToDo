@@ -73,7 +73,7 @@ fun CompletedTasksContent(
                 ConfirmDialog(
                     onDismissRequest = { showDialog = false },
                     onConfirm = {
-                        viewModel.deleteTask(task.id)
+                        viewModel.handleEvent(UiEvents.DeleteTask(task.id))
                         showDialog = false
                     }
                 )
