@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.exercise.todo.ui.dashboard.HomeTabScreen
 import com.exercise.todo.ui.tasks.TasksScreen
 import com.exercise.todo.ui.theme.ToDoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,8 +25,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ToDoAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TasksScreen(
-                        modifier = Modifier.padding(innerPadding)
+                    HomeTabScreen(
+                        modifier = Modifier.padding(innerPadding).padding(top = 24.dp)
                     )
                 }
             }

@@ -2,6 +2,8 @@ package com.exercise.todo.di
 
 import android.content.Context
 import androidx.room.Room
+import com.exercise.todo.data.datasource.TaskDataSource
+import com.exercise.todo.data.datasource.local.LocalDataSourceImpl
 import com.exercise.todo.data.datasource.local.db.TaskDao
 import com.exercise.todo.data.datasource.local.db.TodoDatabase
 import dagger.Module
@@ -29,5 +31,12 @@ object DataModule {
     @Provides
     fun provideTaskDao(database: TodoDatabase): TaskDao {
         return database.taskDao()
+    }
+
+    @Provides
+    fun provideLocalDataSource(
+        taskDao: TaskDao
+    ): TaskDataSource {
+        return LocalDataSourceImpl(taskDao)
     }
 }
