@@ -1,10 +1,9 @@
-package com.exercise.todo.ui.dashboard
+package com.exercise.todo.ui.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -34,6 +33,8 @@ fun HomeTabScreen(
     var tabIndex by remember { mutableIntStateOf(0) }
     val tabs = listOf("To Do", "Completed")
     val state by viewModel.tasksState.collectAsStateWithLifecycle()
+    val errorState by viewModel.errorState.collectAsStateWithLifecycle()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,5 +75,4 @@ fun HomeTabScreen(
             1 -> CompletedTasksScreen(modifier = Modifier, viewModel = viewModel, state = state)
         }
     }
-
 }

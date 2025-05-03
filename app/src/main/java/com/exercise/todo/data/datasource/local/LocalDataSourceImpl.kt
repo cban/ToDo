@@ -5,14 +5,16 @@ import com.exercise.todo.data.datasource.local.db.TaskDao
 import com.exercise.todo.data.mappers.toDomain
 import com.exercise.todo.data.mappers.toEntity
 import com.exercise.todo.data.model.Task
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
     private val taskDao: TaskDao
 ) : TaskDataSource {
 
-    override suspend fun getAllTasks(): List<Task> {
-        return taskDao.getAllTasks().map { it.toDomain() }
+    override  fun getAllTasks(): Flow<List<Task>> {
+        return taskDao.getAllTasks().map { it.map { it.toDomain() } }
     }
 
     override suspend fun getCompletedTasks(): List<Task> {

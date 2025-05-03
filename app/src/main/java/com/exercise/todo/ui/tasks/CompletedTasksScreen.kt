@@ -49,7 +49,8 @@ fun CompletedTasksContent(
     modifier: Modifier = Modifier,
     tasks: List<Task>, viewModel: TasksViewModel
 ) {
-    var showDialog by remember { mutableStateOf(false) }
+    var taskToDelete by remember { mutableStateOf<Task?>(null) }
+    
     if (tasks.isEmpty()) {
         Box(
             modifier = modifier.fillMaxSize(),
@@ -59,22 +60,26 @@ fun CompletedTasksContent(
         }
         return
     }
+
+
     LazyColumn {
-        items(tasks) { task ->
+        items(tasks, key = { task -> task.id }) { task ->
             TaskItem(
                 task = task,
                 onCheckedChange = {
                 },
                 onConfirm = {
-                    showDialog = true
+                    taskToDelete = task
                 },
             )
-            if (showDialog) {
+            taskToDelete?.let { task ->
                 ConfirmDialog(
-                    onDismissRequest = { showDialog = false },
+                    onDismissRequest = {
+                        taskToDelete = null
+                    },
                     onConfirm = {
                         viewModel.handleEvent(UiEvents.DeleteTask(task.id))
-                        showDialog = false
+                        taskToDelete = null
                     }
                 )
             }

@@ -12,8 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.exercise.todo.ui.dashboard.HomeTabScreen
-import com.exercise.todo.ui.tasks.TasksScreen
+import com.exercise.todo.ui.home.HomeTabScreen
 import com.exercise.todo.ui.theme.ToDoAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

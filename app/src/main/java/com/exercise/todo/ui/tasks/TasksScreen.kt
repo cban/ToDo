@@ -1,6 +1,10 @@
 package com.exercise.todo.ui.tasks
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,6 +40,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -88,7 +93,7 @@ fun TasksScreen(
                     modifier = modifier
                         .padding(innerPadding)
                         .padding(top = 16.dp),
-                    tasks = state.tasks?.filter { !it.isCompleted } ?: emptyList(),
+                    tasks = viewModel.getFilteredTasks(state.tasks, isCompleted = false),
                     viewModel = viewModel
                 )
             }
@@ -112,7 +117,9 @@ fun TasksScreen(
 
 @Composable
 fun TasksContent(modifier: Modifier, tasks: List<Task>, viewModel: TasksViewModel) {
-    var showDialog by remember { mutableStateOf(false) }
+    var taskToDelete by remember { mutableStateOf<Task?>(null) }
+
+    val context = LocalContext.current
 
     if (tasks.isEmpty()) {
         Box(
@@ -129,30 +136,41 @@ fun TasksContent(modifier: Modifier, tasks: List<Task>, viewModel: TasksViewMode
             if (task.isCompleted) {
                 return@items
             }
-            TaskItem(
-                modifier.animateItem(),
-                task = task,
-                onCheckedChange = { isChecked ->
-                    viewModel.handleEvent(
-                        UiEvents.UpdateTask(
-                            task.copy(
-                                isCompleted = isChecked
+            var visible by remember { mutableStateOf(false) }
+            LaunchedEffect(Unit) {
+                visible = true
+            }
+
+            AnimatedVisibility(
+                visible = visible,
+                enter = fadeIn(),
+                exit = shrinkVertically() + fadeOut(),
+            ) {
+                TaskItem(
+                    task = task,
+                    onCheckedChange = { isChecked ->
+                        viewModel.handleEvent(
+                            UiEvents.UpdateTask(
+                                task.copy(
+                                    isCompleted = isChecked
+                                )
                             )
                         )
-                    )
-                },
-                onConfirm = {
-                    showDialog = true
-                }
-            )
-            if (showDialog) {
+
+                    },
+                    onConfirm = {
+                        taskToDelete = task
+                    }
+                )
+            }
+            taskToDelete?.let { task ->
                 ConfirmDialog(
-                    onDismissRequest = { showDialog = false },
+                    onDismissRequest = { taskToDelete = null },
                     onConfirm = {
                         viewModel.handleEvent(
                             UiEvents.DeleteTask(task.id)
                         )
-                        showDialog = false
+                        taskToDelete = null
                     }
                 )
             }
@@ -215,7 +233,7 @@ fun TaskItem(
             }
             Icon(
                 imageVector = Icons.Filled.Delete,
-                tint = Color.Gray,
+                tint = Color.Black,
                 modifier = Modifier
                     .padding(16.dp)
                     .align(Alignment.CenterVertically)

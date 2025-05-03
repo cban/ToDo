@@ -2,17 +2,19 @@ package com.exercise.todo.data.repository
 
 import com.exercise.todo.data.datasource.TaskDataSource
 import com.exercise.todo.data.model.Task
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
     private val localDataSource: TaskDataSource
 ) :
     TaskRepository {
-    override suspend fun getAllTasks(): List<Task> {
+    override  fun getAllTasks(): Flow<List<Task>> {
         return try {
             localDataSource.getAllTasks()
         } catch (e: Exception) {
-            emptyList()
+            emptyFlow()
         }
     }
 
