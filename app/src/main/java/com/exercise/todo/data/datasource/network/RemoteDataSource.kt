@@ -1,9 +1,0 @@
-package com.exercise.todo.data.datasource.network
-
-import com.exercise.todo.data.model.WeatherResponse
-
-interface RemoteDataSource {
-
-    suspend fun getCurrentWeather(location: String): WeatherResponse?
-
-}

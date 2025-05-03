@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,19 +11,21 @@ plugins {
 }
 
 android {
-    namespace = "com.exercise.todo"
+    namespace = "com.application.todo"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.exercise.todo"
+        applicationId = "com.application.todo"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "WEATHER_API_KEY", "\"${project.properties["weatherApiKey"]}\"")
+        val properties = Properties().apply {
+            load(FileInputStream(File(rootProject.rootDir, "local.properties")))
+        }
+        buildConfigField("String", "WEATHER_API_KEY", "\"${properties.getProperty("weatherApiKey")}\"")
         buildConfigField("String", "BASE_URL", "\"${project.properties["baseUrl"]}\"")
 
     }
@@ -52,7 +57,7 @@ android {
 }
 
 dependencies {
-
+    implementation (libs.play.services.location)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -62,6 +67,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.dagger.hilt.android)
