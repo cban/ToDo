@@ -1,7 +1,8 @@
 # Todo App
 
 A To do App built with Jetpack Compose using a hybrid MVVM architecture with event-driven UI updates (MVI elements).
-The app lets users add, delete, mark as complete tasks while displaying the current weather information.
+The app lets users add, delete taks , and mark  completed tasks  while displaying the current weather information.
+The display show incompleted  and completed tasks views.
 
 
 ## Technologies
