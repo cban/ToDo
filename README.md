@@ -15,3 +15,10 @@ The display show incompleted  and completed tasks views.
 - **Concurrency**: Coroutines
 - **Image Loading**: Coil
 - **Testing**: JUnit, MockK
+
+
+  <div align="left">
+    <img src="https://github.com/user-attachments/assets/1e962d8b-1abd-4a32-8889-183ad7ec6dc0" width="400px"</img> 
+</div>
+
+
