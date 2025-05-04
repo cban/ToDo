@@ -70,6 +70,7 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    testImplementation(libs.junit.junit)
 
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.dagger.hilt.android)
@@ -96,5 +97,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation (libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
+    testImplementation(kotlin("test"))
+
 
 }

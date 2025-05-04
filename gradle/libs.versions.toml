@@ -23,6 +23,7 @@ mockitoKotlin = "5.4.0"
 mockk = "1.13.7"
 turbine = "1.2.0"
 kotlinxCoroutinesTest = "1.10.1"
+junitJunit = "4.12"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +60,7 @@ mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", versio
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 [bundles]
 retrofit = ["retrofit", "retrofit-moshi-convertor", "retrofit-scalars"]
 

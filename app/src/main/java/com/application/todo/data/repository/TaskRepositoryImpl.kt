@@ -10,7 +10,7 @@ class TaskRepositoryImpl @Inject constructor(
     private val localDataSource: TaskDataSource
 ) :
     TaskRepository {
-    override  fun getAllTasks(): Flow<List<Task>> {
+    override fun getAllTasks(): Flow<List<Task>> {
         return try {
             localDataSource.getAllTasks()
         } catch (e: Exception) {
@@ -18,44 +18,16 @@ class TaskRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getUncompletedTasks(): List<Task> {
-       return try {
-           localDataSource.getUncompletedTasks()
-       } catch (e: Exception){
-              emptyList()
-       }
-    }
-
-    override suspend fun getCompletedTasks(): List<Task> {
-        return try {
-            localDataSource.getCompletedTasks()
-        } catch (e: Exception) {
-            emptyList()
-        }
-    }
-
 
     override suspend fun addTask(task: Task) {
-        try {
-            localDataSource.insertTask(task)
-        } catch (e: Exception) {
-            //
-        }
+        localDataSource.insertTask(task)
     }
 
     override suspend fun updateTask(task: Task) {
-        try {
-            localDataSource.updateTask(task)
-        } catch (e: Exception) {
-
-        }
+        localDataSource.updateTask(task)
     }
 
     override suspend fun deleteTask(taskId: Int) {
-        try {
-            localDataSource.deleteTask(taskId)
-        } catch (e: Exception) {
-
-        }
+        localDataSource.deleteTask(taskId)
     }
 }

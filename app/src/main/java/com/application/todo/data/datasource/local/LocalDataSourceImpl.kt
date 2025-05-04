@@ -17,14 +17,6 @@ class LocalDataSourceImpl @Inject constructor(
         return taskDao.getAllTasks().map { it.map { it.toDomain() } }
     }
 
-    override suspend fun getCompletedTasks(): List<Task> {
-        return taskDao.getCompletedTasks().map { it.toDomain() }
-    }
-
-    override suspend fun getUncompletedTasks(): List<Task> {
-        return taskDao.getUncompletedTasks().map { it.toDomain() }
-    }
-
     override suspend fun insertTask(task: Task) {
         taskDao.insertTask(task.toEntity())
     }

@@ -37,7 +37,6 @@ class TodoViewModel @Inject constructor(
             initialValue = UiState.Idle
         )
 
-
     private val _weatherState = MutableStateFlow<UiState<CurrentWeather>?>(UiState.Idle)
     val weatherState = _weatherState.asStateFlow()
 
@@ -87,7 +86,7 @@ class TodoViewModel @Inject constructor(
         }
     }
 
-    fun getWeather() {
+    fun getWeatherInfo() {
         viewModelScope.launch {
             try {
                 _weatherState.update { UiState.Loading }

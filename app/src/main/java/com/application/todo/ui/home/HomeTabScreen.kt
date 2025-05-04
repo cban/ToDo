@@ -52,7 +52,7 @@ fun HomeTabScreen(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            viewModel.getWeather()
+            viewModel.getWeatherInfo()
         } else {
             Toast.makeText(
                 context,
@@ -67,7 +67,7 @@ fun HomeTabScreen(
         ) == PackageManager.PERMISSION_GRANTED
 
         if (hasPermission) {
-            viewModel.getWeather()
+            viewModel.getWeatherInfo()
         } else {
             permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
