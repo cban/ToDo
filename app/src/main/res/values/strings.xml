@@ -4,9 +4,10 @@
     <string name="completed">Completed</string>
     <string name="no_weather_data_available">No Weather data available</string>
     <string name="weather_icon_desc">Weather Icon</string>
-    <string name="current_temperature_c">Current Temperature:%1$s °C</string>
-    <string name="sunrise_time">Sunrise Time:%1$s</string>
-    <string name="sunset_time">Sunset Time:%1$s</string>
+    <string name="current_temperature_c">Current Temperature</string>
+    <string name="temperature_c">%1$s°C</string>
+    <string name="sunrise_time">Sunrise Time \n%1$s</string>
+    <string name="sunset_time">Sunset Time \n%1$s</string>
     <string name="location_permission_denied">Location permission denied</string>
     <string name="add_task">Add Task</string>
     <string name="cancel">Cancel</string>

@@ -33,6 +33,7 @@ import com.application.todo.R
 import com.application.todo.ui.home.tasks.CompletedTasksScreen
 import com.application.todo.ui.home.tasks.TasksScreen
 import com.application.todo.ui.home.weather.WeatherWidget
+import com.application.todo.ui.theme.Blue
 import com.application.todo.ui.theme.Purple40
 
 
@@ -90,7 +91,7 @@ fun HomeTabScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
-            containerColor = Purple40,
+            containerColor = Blue,
             indicator = { tabPositions ->
                 TabRowDefaults.SecondaryIndicator(
                     modifier = Modifier.tabIndicatorOffset(tabPositions[tabIndex]),

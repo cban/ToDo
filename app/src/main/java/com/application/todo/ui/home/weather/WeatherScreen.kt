@@ -12,12 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.application.todo.R
 import com.application.todo.data.model.CurrentWeather
-import com.application.todo.ui.home.tasks.LoadingIndicator
 import com.application.todo.ui.home.UiState
+import com.application.todo.ui.home.tasks.LoadingIndicator
 
 @Composable
 fun WeatherWidget(
@@ -58,7 +60,6 @@ fun WeatherContent(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -66,30 +67,42 @@ fun WeatherContent(
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .size(128.dp)
-                    .padding(16.dp),
+                    .size(148.dp)
+                    .padding(8.dp),
                 model = "https:${weather.icon}",
                 contentDescription = stringResource(R.string.weather_icon_desc),
             )
 
+            Column(verticalArrangement = Arrangement.Center) {
+                Text(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.CenterHorizontally),
+                    text = stringResource(R.string.current_temperature_c),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.CenterHorizontally),
+                    text = stringResource(R.string.temperature_c, weather.temperature),
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+        }
+        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+
             Text(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .align(Alignment.CenterVertically),
-                text = stringResource(R.string.current_temperature_c, weather.temperature),
-                style = MaterialTheme.typography.titleMedium
+                stringResource(R.string.sunrise_time, weather.sunriseTime),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+            Text(
+                stringResource(R.string.sunset_time, weather.sunsetTime),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(vertical = 8.dp)
             )
         }
-
-        Text(
-            stringResource(R.string.sunrise_time, weather.sunriseTime),
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-        Text(
-            stringResource(R.string.sunset_time, weather.sunsetTime),
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
     }
 }
