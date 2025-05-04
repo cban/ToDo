@@ -19,7 +19,6 @@ import com.application.todo.data.model.CurrentWeather
 import com.application.todo.ui.home.tasks.LoadingIndicator
 import com.application.todo.ui.home.UiState
 
-
 @Composable
 fun WeatherWidget(
     modifier: Modifier = Modifier,

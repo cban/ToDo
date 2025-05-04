@@ -49,9 +49,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.application.todo.R
 import com.application.todo.data.model.Task
 import com.application.todo.ui.home.TodoViewModel
 import com.application.todo.ui.home.UiEvents
@@ -72,8 +74,8 @@ fun TasksScreen(
                 onClick = {
                     showDialog = true
                 },
-                icon = { Icon(Icons.Filled.Create, "Add") },
-                text = { Text(text = "Add Task") },
+                icon = { Icon(Icons.Filled.Create, stringResource(R.string.add)) },
+                text = { Text(text = stringResource(R.string.add_task)) },
             )
             if (showDialog) {
                 CustomDialog(
@@ -129,7 +131,7 @@ fun TasksContent(modifier: Modifier, tasks: List<Task>, viewModel: TodoViewModel
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "No tasks available")
+            Text(text = stringResource(R.string.no_tasks_available))
         }
         return
     }
@@ -184,7 +186,9 @@ fun TasksContent(modifier: Modifier, tasks: List<Task>, viewModel: TodoViewModel
 @Composable
 fun LoadingIndicator() {
     Box(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
@@ -218,7 +222,7 @@ fun TaskItem(
                         if (it) {
                             Toast.makeText(
                                 context,
-                                "${task.title} is Completed",
+                                context.getString(R.string.task_completed, task.title),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -243,7 +247,7 @@ fun TaskItem(
                     .clickable {
                         onConfirm()
                     },
-                contentDescription = "Delete"
+                contentDescription = stringResource(R.string.delete)
             )
         }
     }
@@ -256,16 +260,16 @@ fun ConfirmDialog(
 ) {
     AlertDialog(
         onDismissRequest = { onDismissRequest() },
-        title = { Text(text = "Delete Task") },
-        text = { Text(text = "Are you sure you want to delete this task?") },
+        title = { Text(text = stringResource(R.string.delete_task)) },
+        text = { Text(text = stringResource(R.string.are_you_sure_you_want_to_delete_this_task)) },
         confirmButton = {
             Button(onClick = { onConfirm() }) {
-                Text(text = "Delete")
+                Text(text = stringResource(R.string.delete))
             }
         },
         dismissButton = {
             OutlinedButton(onClick = { onDismissRequest() }) {
-                Text(text = "Cancel")
+                Text(text = stringResource(R.string.cancel))
             }
         }
     )
@@ -292,7 +296,7 @@ fun CustomDialog(
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
                     text =
-                        "Add A Task to your To Do",
+                        stringResource(R.string.add_a_task_to_your_to_do_list),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
@@ -300,7 +304,7 @@ fun CustomDialog(
                         .align(Alignment.CenterHorizontally)
                 )
                 OutlinedTextField(
-                    label = { Text("Enter Title") },
+                    label = { Text(stringResource(R.string.enter_title)) },
                     value = task.title,
                     onValueChange = { task = task.copy(title = it) },
                     modifier = Modifier
@@ -308,7 +312,7 @@ fun CustomDialog(
                         .padding(16.dp)
                 )
                 OutlinedTextField(
-                    label = { Text("Enter Description") },
+                    label = { Text(stringResource(R.string.enter_description)) },
                     value = task.description,
                     onValueChange = { value -> task = task.copy(description = value) },
                     modifier = Modifier
@@ -325,12 +329,13 @@ fun CustomDialog(
                     Button(
                         onClick = { onConfirm(task) },
                     ) {
-                        Text("Add Task")
+                        Text(stringResource(R.string.add_task))
                     }
                     OutlinedButton(
                         onClick = { onDismissRequest() },
                     ) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.cancel))
+
                     }
                 }
 

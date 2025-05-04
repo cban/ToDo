@@ -70,7 +70,7 @@ class TodoViewModel @Inject constructor(
     fun addTask(task: Task) {
         viewModelScope.launch {
             try {
-                repository.insertTask(task)
+                repository.addTask(task)
             } catch (e: Exception) {
                 _errorState.update { UiState.Error(e.message.toString()) }
             }
@@ -93,7 +93,6 @@ class TodoViewModel @Inject constructor(
                 _weatherState.update { UiState.Loading }
                 val location = weatherRepository.getLocation()
                 location?.let {
-                    println(" Weather${location.latitude} , ${location.longitude}")
                     val weatherData =
                         weatherRepository.getCurrentWeather("${it.latitude},${it.longitude}")
                     weatherData?.let { weather ->

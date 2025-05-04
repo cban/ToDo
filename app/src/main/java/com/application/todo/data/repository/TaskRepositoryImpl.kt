@@ -35,7 +35,7 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun insertTask(task: Task) {
+    override suspend fun addTask(task: Task) {
         try {
             localDataSource.insertTask(task)
         } catch (e: Exception) {
